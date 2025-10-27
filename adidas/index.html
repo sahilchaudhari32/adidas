@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Festive Offer - Adidas Clone</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #ffffff;
+            color: #000000;
+            line-height: 1.5;
+        }
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        ul {
+            list-style: none;
+        }
+        button {
+            font-family: inherit;
+            cursor: pointer;
+            border: none;
+            background-color: transparent;
+        }
+        img {
+            max-width: 100%;
+            display: block;
+        }
+    
+        .container {
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 1rem; 
+            padding-right: 1rem; 
+        }
+        .top-utility-bar {
+            background-color: #f5f5f5; 
+            padding: 0.25rem 1rem;
+            display: none; 
+        }
+        .top-utility-bar ul {
+            display: flex;
+            justify-content: flex-end;
+            font-size: 0.75rem; 
+            font-weight: 500; 
+        }
+        .top-utility-bar li {
+            margin-left: 1rem; 
+        }
+
+        .main-header {
+            position: sticky;
+            top: 0;
+            background-color: #ffffff;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06); 
+            z-index: 50;
+        }
+        .main-header .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+        
+        .header-logo img {
+            height: 2rem;
+            width: auto;
+        }
+        
+        .main-navigation {
+            display: none; 
+            flex-grow: 1;
+            justify-content: center;
+            align-items: center;
+        }
+        .main-navigation a {
+            font-size: 0.875rem; 
+            font-weight: 700; 
+            text-transform: uppercase;
+            margin-left: 1.5rem; 
+        }
+        .main-navigation a.festive-offer {
+            color: #dc2626; 
+        }
+
+        .search-and-icons {
+            display: flex;
+            align-items: center;
+        }
+        .search-and-icons > * {
+            margin-left: 1rem; 
+        }
+
+        .search-bar {
+            display: none; 
+            align-items: center;
+            background-color: #f5f5f5; 
+            border-radius: 0.5rem; 
+            padding: 0.375rem 0.75rem; 
+        }
+        .search-bar input {
+            background-color: transparent;
+            font-size: 0.875rem; 
+            border: none;
+            outline: none;
+            width: 8rem; 
+        }
+        .search-bar button img {
+            width: 1.25rem; 
+            height: 1.25rem; 
+        }
+
+        .header-icons a, .header-icons button {
+            padding: 0.25rem; 
+            border-radius: 9999px; 
+            position: relative;
+        }
+        .header-icons a:hover, .header-icons button:hover {
+            background-color: #f5f5f5; 
+            text-decoration: none;
+        }
+        .header-icons img {
+            width: 1.5rem; 
+            height: 1.5rem; 
+        }
+        .header-icons .wishlist-count {
+            position: absolute;
+            top: 0;
+            right: 0;
+            height: 1rem;
+            width: 1rem; 
+            border-radius: 9999px; 
+            background-color: #000000;
+            color: #ffffff;
+            font-size: 10px;
+            font-weight: 700;
+            text-align: center;
+            line-height: 16px;
+        }
+        
+        .mobile-menu-button {
+            padding: 0.25rem;
+            border-radius: 9999px;
+        }
+        .mobile-menu-button:hover {
+            background-color: #f5f5f5;
+        }
+        .mobile-menu-button img {
+            width: 1.5rem;
+            height: 1.5rem;
+        }
+
+        .main-content {
+            padding-top: 1.5rem;
+            padding-bottom: 1.5rem;
+        }
+
+        .breadcrumb {
+            font-size: 0.875rem; 
+            margin-bottom: 1rem; 
+        }
+        .breadcrumb .back-link {
+            font-weight: 700; 
+            display: inline-flex;
+            align-items: center;
+        }
+        .breadcrumb .back-link img {
+            width: 1em;
+            height: 1em;
+            margin-right: 0.25rem;
+        }
+        .breadcrumb .back-link span {
+            text-decoration: underline;
+        }
+        .breadcrumb span {
+            color: #6b7280; 
+        }
+
+        .page-title {
+            font-size: 1.875rem; 
+            font-weight: 800; 
+            margin-bottom: 1.5rem;
+        }
+        .page-title .item-count {
+            font-size: 1rem;
+            font-weight: 400; 
+            color: #6b7280; 
+            vertical-align: top;
+        }
+        .promo-category-grid {
+            position: relative;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            margin-bottom: 2rem;
+        }
+        .promo-background, .promo-background-orange {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1;
+        }
+        .promo-background {
+            background-color: #f5f5f5;
+            background-image: linear-gradient(45deg, #e9ecef 25%, transparent 25%),
+                              linear-gradient(-45deg, #e9ecef 25%, transparent 25%),
+                              linear-gradient(45deg, transparent 75%, #e9ecef 75%),
+                              linear-gradient(-45deg, transparent 75%, #e9ecef 75%);
+            background-size: 20px 20px;
+            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+            opacity: 0.3;
+            display: none; 
+        }
+        .promo-background-orange {
+            background-color: #d35400;
+            background-image: linear-gradient(45deg, #c04a00 25%, transparent 25%),
+                              linear-gradient(-45deg, #c04a00 25%, transparent 25%),
+                              linear-gradient(45deg, transparent 75%, #c04a00 75%),
+                              linear-gradient(-45deg, transparent 75%, #c04a00 75%);
+            background-size: 20px 20px;
+            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+            opacity: 0.6;
+            grid-column: span 3 / span 3;
+        }
+
+        .promo-card {
+            position: relative;
+            z-index: 10;
+            background-color: #ffffff;
+            margin: 0.25rem; 
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-md */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .promo-card img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+        .promo-card .promo-text {
+            padding: 1rem;
+            text-align: center;
+        }
+        .promo-card .promo-title {
+            font-weight: 700; 
+            font-size: 0.875rem; 
+            text-transform: uppercase;
+            text-decoration: underline;
+        }
+        .promo-card .promo-overlay-text {
+            padding: 1rem;
+            text-align: left;
+        }
+        .promo-card .promo-overlay-title {
+            font-weight: 700;
+            font-size: 1.125rem; 
+            text-transform: uppercase;
+            color: #ffffff;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+        .promo-card.dark {
+            background-color: #000000;
+            color: #ffffff;
+        }
+        .promo-card .promo-overlay-title .large-text {
+            font-size: 3rem;
+            display: block;
+        }
+        .filter-bar {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 1rem; 
+        }
+        .filter-button {
+            display: flex;
+            align-items: center;
+            border: 1px solid #000000;
+            padding: 0.5rem 1rem; 
+            border-radius: 0.375rem; 
+            font-size: 0.875rem;
+            font-weight: 700; 
+        }
+        .filter-button:hover {
+            background-color: #f5f5f5; 
+        }
+        .filter-button span {
+            margin-right: 0.5rem; 
+        }
+        .filter-button img {
+            width: 1.25rem; 
+            height: 1.25rem;
+        }
+
+        /* Product Grid */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem 1rem; 
+        }
+        
+        .product-card {
+            background-color: #fff;
+            margin-bottom: 1rem;
+        }
+        .product-card .product-image-placeholder {
+            width: 100%;
+            object-fit: cover;
+            background-color: #f5f5f5;
+        }
+        .product-card .product-info {
+            padding: 0.5rem; 
+        }
+        .product-card .price {
+            font-size: 0.875rem; 
+            font-weight: 700; 
+        }
+        .product-card .original-price {
+            font-size: 0.75rem; 
+            color: #6b7280; 
+            text-decoration: line-through;
+        }
+        .product-card .discount {
+            color: #dc2626; 
+            margin-left: 0.25rem; 
+        }
+        .product-card .product-name {
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-top: 0.25rem; 
+        }
+        .product-card .product-category,
+        .product-card .product-colors {
+            font-size: 0.75rem; 
+            color: #6b7280;
+        }
+        .product-card .product-badge {
+            font-size: 0.75rem; 
+            font-weight: 700;
+            margin-top: 0.25rem; 
+        }
+        .product-card .badge-new {
+            color: #166534; 
+        }
+        .product-card .badge-offer {
+            color: #dc2626;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 2rem 0;
+            padding: 1rem 0; 
+            border-top: 1px solid #e5e7eb;
+            border-bottom: 1px solid #e5e7eb; 
+        }
+        .pagination .page-info {
+            font-size: 0.875rem; 
+            font-weight: 500; 
+        }
+        .pagination .next-button {
+            background-color: #000000;
+            color: #ffffff;
+            padding: 0.75rem 2rem;
+            border-radius: 0.375rem; 
+            font-size: 0.875rem;
+            font-weight: 700;
+        }
+        .pagination .next-button:hover {
+            background-color: #374151; 
+            text-decoration: none;
+        }
+        
+        .categories-section {
+            margin: 3rem 0; 
+        }
+        .categories-section h2 {
+            font-size: 1.125rem; 
+            font-weight: 700; 
+            margin-bottom: 1.5rem; 
+        }
+        .categories-section-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem 2rem; 
+            font-size: 0.875rem; 
+        }
+        .categories-section-grid ul li {
+            margin-bottom: 0.5rem; 
+        }
+        
+        .signup-banner {
+            background-color: #427A5B;
+            padding: 2rem 1rem; 
+            color: #ffffff;
+        }
+        .signup-banner .container {
+            display: flex;
+            flex-direction: column; 
+            justify-content: space-between;
+            align-items: center;
+        }
+        .signup-banner h2 {
+            font-size: 1.875rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 1rem; 
+        }
+        .signup-banner .signup-button {
+            background-color: #ffffff;
+            color: #000000;
+            font-weight: 700; 
+            font-size: 0.875rem; 
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.375rem; 
+            display: flex;
+            align-items: center;
+        }
+        .signup-banner .signup-button:hover {
+            background-color: #e5e7eb; 
+            text-decoration: none;
+        }
+        .signup-banner .signup-button span {
+            margin-right: 0.5rem; 
+        }
+        .signup-banner .signup-button img {
+            width: 1.25rem;
+            height: 1.25rem; 
+        }
+        .main-footer {
+            background-color: #000000;
+            color: #d1d5db; 
+            padding: 3rem 1rem; 
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem; 
+        }
+        .footer-column h3 {
+            font-weight: 700; 
+            color: #ffffff;
+            text-transform: uppercase;
+            margin-bottom: 1rem; 
+        }
+        .footer-column ul {
+            font-size: 0.875rem; 
+        }
+        .footer-column ul li {
+            margin-bottom: 0.5rem;
+        }
+        .footer-column ul .separator {
+            margin-top: 1rem;
+        }
+        .footer-follow-us img {
+            width: 1.5rem; 
+            height: 1.5rem;
+        }
+        
+        .sub-footer {
+            background-color: #000000;
+            color: #9ca3af; 
+            border-top: 1px solid #374151; 
+            padding: 1.5rem 1rem; 
+            font-size: 0.75rem; 
+        }
+        .sub-footer .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .sub-footer ul {
+            display: flex;
+            flex-wrap: wrap; 
+            justify-content: center; 
+            margin-bottom: 0.5rem; 
+        }
+        .sub-footer ul li {
+            margin-left: 0.5rem;
+            margin-right: 0.5rem;
+        }
+
+        @media (min-width: 640px) {
+            .product-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        @media (min-width: 768px) {
+            .container {
+                padding-left: 2.5rem;
+                padding-right: 2.5rem; 
+            }
+            .top-utility-bar {
+                display: block;
+            }
+            .search-bar {
+                display: flex; 
+            }
+            .mobile-menu-button {
+                display: none; 
+            }
+            .page-title {
+                font-size: 2.25rem;
+            }
+            .promo-background {
+                display: block; 
+            }
+            .promo-background-orange {
+                grid-column: span 3 / span 3;
+                grid-column-start: 4;
+            }
+            .product-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            .categories-section-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            .signup-banner .container {
+                flex-direction: row; 
+            }
+            .signup-banner h2 {
+                text-align: left; 
+                margin-bottom: 0;
+            }
+            .footer-grid {
+                grid-template-columns: repeat(6, 1fr);
+            }
+            .footer-column {
+                grid-column: span 1 / span 1;
+            }
+            .sub-footer .container {
+                flex-direction: row; 
+            }
+            .sub-footer ul {
+                margin-bottom: 0; 
+            }
+        }
+        @media (min-width: 1024px) {
+            .container {
+                max-width: 1280px;
+            }
+            .main-navigation {
+                display: flex;
+            }
+            .search-bar input {
+                width: 12rem; 
+            }
+            .promo-category-grid {
+                grid-template-columns: repeat(6, 1fr);
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+
+    <div class="top-utility-bar">
+        <div class="container">
+            <ul>
+                <li><a href="#">help</a></li>
+                <li><a href="#">orders and returns</a></li>
+                <li><a href="#">sign up</a></li>
+                <li><a href="#">log in</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <header class="main-header">
+        <div class="container">
+            <a href="#" class="header-logo">
+                <img src="https://tse1.mm.bing.net/th/id/OIP.zLlevER4WjUVVMJaffejkAHaFj?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Logo" style="height: 4rem; width: auto;">
+            </a>
+
+            <nav class="main-navigation">
+                <a href="#">Shoes</a>
+                <a href="#">Men</a>
+                <a href="#">Women</a>
+                <a href="#">Kids</a>
+                <a href="#">Sports & Lifestyle</a>
+                <a href="#">Outlet</a>
+                <a href="#" class="festive-offer">Festive Offer - Extra 15% OFF</a>
+            </nav>
+            <div class="search-and-icons">
+                        <div class="search-bar">
+                    <input type="text" placeholder="Search">
+                    <button>
+                        <img src="https://api.iconify.design/mdi:magnify.svg?color=black" alt="Search" width="20" height="20">
+                    </button>
+                </div>
+
+                <div class="header-icons">
+                    <a href="#">
+                        <img src="https://api.iconify.design/mdi:account-outline.svg?color=black" alt="User Account" width="24" height="24">
+                    </a>
+                    <a href="#">
+                        <img src="https://api.iconify.design/mdi:heart-outline.svg?color=black" alt="Wishlist" width="24" height="24">
+                        <span class="wishlist-count">1</span>
+                    </a>
+                    <a href="#">
+                        <img src="https://api.iconify.design/mdi:bag-outline.svg?color=black" alt="Shopping Bag" width="24" height="24">
+                    </a>
+                </div>
+                
+                <button class="mobile-menu-button">
+                    <img src="https://api.iconify.design/mdi:menu.svg?color=black" alt="Menu" width="24" height="24">
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content container">
+        
+        <div class="breadcrumb">
+            <a href="#" class="back-link">
+                <img src="https://api.iconify.design/mdi:arrow-left.svg?color=black" alt="Back" width="16" height="16">
+                <span>BACK</span>
+            </a>
+            <span> / <a href="#">Home</a> / <a href="#">special offer</a></span>
+        </div>
+        <h1 class="page-title">
+            FESTIVE OFFER - EXTRA 15% OFF ON ₹3999
+            <span class="item-count">[3091]</span>
+        </h1>
+
+        <div class="promo-category-grid">
+            <div class="promo-background"></div>
+            <div class="promo-background-orange"></div>
+
+            <a href="#" class="promo-card">
+                <img src="https://th.bing.com/th/id/OIP.dnfxA9ezw85Cs158n1xcNwHaLi?w=208&h=310&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3" alt="Amazing Deals for Men">
+                <div class="promo-text">
+                    <h3 class="promo-title">Amazing Deals for Men</h3>
+                </div>
+            </a>
+            <a href="#" class="promo-card">
+                <img src="https://th.bing.com/th/id/OIP.JkYxUVrG_Dc6rOx58umFOQHaLH?w=132&h=196&c=7&r=0&o=7&pid=1.7&rm=3" alt="Top Picks for Women">
+                <div class="promo-text">
+                    <h3 class="promo-title">Top Picks for Women</h3>
+                </div>
+            </a>
+            <a href="#" class="promo-card">
+                <img src="https://th.bing.com/th/id/OIP.gB7Tv6kvqw3mlug0rTc-kAAAAA?w=133&h=180&c=7&r=0&o=7&pid=1.7&rm=3" alt="Save More on Kids">
+                <div class="promo-text">
+                    <h3 class="promo-title">Save More on Kids</h3>
+                </div>
+            </a>
+            <a href="#" class="promo-card">
+                <div class="promo-overlay-text">
+                    <h3 class="promo-overlay-title">First Time on Discount</h3>
+                </div>
+                <div class="promo-text">
+                    <h3 class="promo-title">First Time on Discount</h3>
+                </div>
+            </a>
+            <a href="#" class="promo-card">
+                <div class="promo-overlay-text">
+                    <h3 class="promo-overlay-title">Last Size</h3>
+                </div>
+                <div class="promo-text">
+                    <h3 class="promo-title">Few Sizes Left</h3>
+                </div>
+            </a>
+            <a href="#" class="promo-card dark">
+                <div class="promo-overlay-text">
+                    <h3 class="promo-overlay-title">Flat <span class="large-text">50%</span> Off</h3>
+                </div>
+                <div class="promo-text">
+                    <h3 class="promo-title">Shop All</h3>
+                </div>
+            </a>
+        </div>
+
+
+        <div class="filter-bar">
+            <button class="filter-button">
+                <span>FILTER & SORT</span>
+                <img src="https://api.iconify.design/mdi:filter-variant.svg?color=black" alt="Filter" width="20" height="20">
+            </button>
+        </div>
+
+        <div class="product-grid">
+
+            <div class="product-card">
+                <img src="https://assets.adidas.com/images/w_766,h_766,f_auto,q_auto,fl_lossy,c_fill,g_auto/f39ac0f4ee3b453a8beb2c586ba0143a_9366/sl-72-rs-shoes.jpg" alt="Product Image" class="product-image-placeholder">
+                <div class="product-info">
+                    <p class="price">₹ 2 499.50</p>
+                    <p class="original-price">₹ 4 999.00 <span class="discount">Original price -50%</span></p>
+                    <p class="product-name">Comfort 2.0 Shoes</p>
+                    <p class="product-category">Men Lifestyle</p>
+                    <p class="product-colors">3 colours</p>
+                    <p class="product-badge badge-new">New</p>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <img src="https://assets.adidas.com/images/w_766,h_766,f_auto,q_auto,fl_lossy,c_fill,g_auto/deebd16dcc7e45849e0da991001b3652_9366/adilette-aqua-slides.jpg" alt="Product Image" class="product-image-placeholder">
+                <div class="product-info">
+                    <p class="price">₹ 3 499.50</p>
+                    <p class="original-price">₹ 6 999.00 <span class="discount">Original price -50%</span></p>
+                    <p class="product-name">adidas Z.N.E. Woven-Knit Pants</p>
+                    <p class="product-category">Men originals</p>
+                    <p class="product-colors">2 colours</p>
+                    <p class="product-badge badge-offer">Extra 15% off at cart</p>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <img src="https://assets.adidas.com/images/w_766,h_766,f_auto,q_auto,fl_lossy,c_fill,g_auto/9b2b8f0f9c3f438e80acaf240129a2c7_9366/train-essentials-feelready-training-tee.jpg" alt="Product Image" class="product-image-placeholder">
+                <div class="product-info">
+                    <p class="price">₹ 1 999.50</p>
+                    <p class="original-price">₹ 3 999.00 <span class="discount">Original price -50%</span></p>
+                    <p class="product-name">CLUB 3STR POLO</p>
+                    <p class="product-category">Men Tennis</p>
+                    <p class="product-colors">4 colours</p>
+                    <p class="product-badge badge-new">New</p>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <img src="https://assets.adidas.com/images/w_766,h_766,f_auto,q_auto,fl_lossy,c_fill,g_auto/3f86dc7e483545e0a638434dd3ef5f8a_9366/premium-essentials-tank-top.jpg" alt="Product Image" class="product-image-placeholder">
+                <div class="product-info">
+                    <p class="price">₹ 4 619.50</p>
+                    <p class="original-price">₹ 6 599.00 <span class="discount">Original price -30%</span></p>
+                    <p class="product-name">Own the Run Training Pants</p>
+                    <p class="product-category">Men Running</p>
+                    <p class="product-colors">2 colours</p>
+                    <p class="product-badge badge-offer">Extra 15% off at cart</p>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <img src="https://assets.adidas.com/images/w_766,h_766,f_auto,q_auto,fl_lossy,c_fill,g_auto/30c2fa51c0604064b03375f3332b8cf7_9366/fauxx-run-2.0-shoes.jpg" alt="Product Image" class="product-image-placeholder">
+                <div class="product-info">
+                    <p class="price">₹ 999.50</p>
+                    <p class="original-price">₹ 1 999.00 <span class="discount">Original price -50%</span></p>
+                    <p class="product-name">Train Essentials Feelready Training Tee</p>
+                    <p class="product-category">Men Gym & Training</p>
+                    <p class="product-colors">7 colours</p>
+                    <p class="product-badge badge-new">New</p>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <img src="https://assets.adidas.com/images/w_766,h_766,f_auto,q_auto,fl_lossy,c_fill,g_auto/30c2fa51c0604064b03375f3332b8cf7_9366/fauxx-run-2.0-shoes.jpg" alt="Product Image" class="product-image-placeholder">
+                <div class="product-info">
+                    <p class="price">₹ 2 999.50</p>
+                    <p class="original-price">₹ 5 999.00 <span class="discount">Original price -50%</span></p>
+                    <p class="product-name">Ultraboost DNA 5 Shoes</p>
+                    <p class="product-category">Men Sportswear</p>
+                    <p class="product-colors">7 colours</p>
+                    <p class="product-badge badge-offer">Extra 15% off at cart</p>
+                </div>
+            
+            <div class="product-card">
+                <img src="https://assets.adidas.com/images/w_766,h_766,f_auto,q_auto,fl_lossy,c_fill,g_auto/637d0ea1499842939885757c3927c44e_9366/stabile-2.0-flip-flop-m.jpg" alt="Product Image" class="product-image-placeholder">
+                <div class="product-info">
+                    <p class="price">₹ 3 599.50</p>
+                    <p class="original-price">₹ 5 999.00 <span class="discount">Original price -40%</span></p>
+                    <p class="product-name">Grand Court Alpha Shoes</p>
+                    <p class="product-category">Men Lifestyle</p>
+                    <p class="product-colors">4 colours</p>
+                    <p class="product-badge badge-offer">Extra 15% off at cart</p>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <img src="https://assets.adidas.com/images/w_766,h_766,f_auto,q_auto,fl_lossy,c_fill,g_auto/877a3f5cd61d4a1da317b99e281c9d00_9366/small-logo-polo-shirt.jpg" alt="Product Image" class="product-image-placeholder">
+                <div class="product-info">
+                    <p class="price">₹ 2 299.50</p>
+                    <p class="original-price">&nbsp;</p> 
+                    <p class="product-name">Designed for Training Workout Tee</p>
+                    <p class="product-category">Men Training</p>
+                    <p class="product-colors">12 colours</p>
+                    <p class="product-badge badge-new">New</p>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <img src="https://assets.adidas.com/images/w_766,h_766,f_auto,q_auto,fl_lossy,c_fill,g_auto/5c825215150544fcbf1a9d37424a65fa_9366/comfortz-1.0-shoes.jpg" alt="Product Image" class="product-image-placeholder">
+                <div class="product-info">
+                    <p class="price">₹ 2 499.50</p>
+                    <p class="original-price">₹ 4 999.00 <span class="discount">Original price -50%</span></p>
+                    <p class="product-name">Premium Essentials Tank Top</p>
+                    <p class="product-category">Women originals</p>
+                    <p class="product-colors">2 colours</p>
+                    <p class="product-badge badge-new">New</p>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <img src="https://assets.adidas.com/images/w_766,h_766,f_auto,q_auto,fl_lossy,c_fill,g_auto/eedca44e14e049818cb2d38840d4dad7_9366/tiro-25-essentials-training-pants.jpg" alt="Product Image" class="product-image-placeholder">
+                <div class="product-info">
+                    <p class="price">₹ 2 399.50</p>
+                    <p class="original-price">₹ 2 999.00 <span class="discount">Original price -20%</span></p>
+                    <p class="product-name">Tartan Regular Tee</p>
+                    <p class="product-category">Men originals</p>
+                    <p class="product-colors">2 colours</p>
+                    <p class="product-badge badge-new">New</p>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="https://assets.adidas.com/images/w_766,h_766,f_auto,q_auto,fl_lossy,c_fill,g_auto/3cc1965fae2844b7bb037a70f2c8375f_9366/grand-court-alpha-00s-shoes.jpg" alt="Product Image" class="product-image-placeholder">
+                <div class="product-info">
+                    <p class="price">₹ 2 499.50</p>
+                    <p class="original-price">₹ 4 999.00 <span class="discount">Original price -50%</span></p>
+                    <p class="product-name">Foam Run 2.0 Shoes</p>
+                    <p class="product-category">Men Lifestyle</p>
+                    <p class="product-colors">2 colours</p>
+                    <p class="product-badge badge-new">New</p>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <img src="https://assets.adidas.com/images/w_766,h_766,f_auto,q_auto,fl_lossy,c_fill,g_auto/8877597dbccf4db09ec3577eefc61a14_9366/ultradream-dna-shoes.jpg" alt="Product Image" class="product-image-placeholder">
+                <div class="product-info">
+                    <p class="price">₹ 2 499.50</p>
+                    <p class="original-price">₹ 4 999.00 <span class="discount">Original price -50%</span></p>
+                    <p class="product-name">Foam Run 2.0 Shoes</p>
+                    <p class="product-category">Men Lifestyle</p>
+                    <p class="product-colors">2 colours</p>
+                    <p class="product-badge badge-new">New</p>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <img src="https://assets.adidas.com/images/w_383,h_383,f_auto,q_auto,fl_lossy,c_fill,g_auto/46a8714a4cf741dda7db6a92a7980abd_9366/ComfortZ_1.0_Shoes_Blue_JK2388_02_standard_hover.jpg" alt="Product Image" class="product-image-placeholder">
+                <div class="product-info">
+                    <p class="price">₹ 1 439.50</p>
+                    <p class="original-price">₹ 1 799.00 <span class="discount">Original price -20%</span></p>
+                    <p class="product-name">STABILE 2.0 FLIP FLOP M</p>
+                    <p class="product-category">Men Lifestyle</p>
+                    <p class="product-colors">5 colours</p>
+                    <p class="product-badge badge-new">New</p>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="https://assets.adidas.com/images/w_766,h_766,f_auto,q_auto,fl_lossy,c_fill,g_auto/90ce388a73f54ac8bc258e4968d3febc_9366/adidas-adicolor-woven-drill-pant.jpg" alt="Product Image" class="product-image-placeholder">
+                <div class="product-info">
+                    <p class="price">₹ 1 519.50</p>
+                    <p class="original-price">₹ 3 799.00 <span class="discount">Original price -60%</span></p>
+                    <p class="product-name">HopRun M pant</p>
+                    <p class="product-category">Men Running</p>
+                    <p class="product-colors">5 colours</p>
+                    <p class="product-badge badge-new">New</p>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <img src="https://assets.adidas.com/images/w_383,h_383,f_auto,q_auto,fl_lossy,c_fill,g_auto/15ec6f117188433b937dad81010eda8c_9366/adilette-shower-slides.jpg" alt="Product Image" class="product-image-placeholder">
+                <div class="product-info">
+                    <p class="price">₹ 2 199.50</p>
+                    <p class="original-price">₹ 3 999.00 <span class="discount">Original price -45%</span></p>
+                    <p class="product-name">Race Mode Shoes</p>
+                    <p class="product-category">Men Running</p>
+                    <p class="product-colors">4 colours</p>
+                    <p class="product-badge badge-new">New</p>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <img src="https://assets.adidas.com/images/w_766,h_766,f_auto,q_auto,fl_lossy,c_fill,g_auto/58e293e87c2c411e8cf2fd0a56ade334_9366/own-the-run-3-stripes-pants.jpg" alt="Product Image" class="product-image-placeholder">
+                <div class="product-info">
+                    <p class="price">₹ 1 639.50</p>
+                    <p class="original-price">₹ 2 399.00 <span class="discount">Original price -30%</span></p>
+                    <p class="product-name">M TRNS CAT T</p>
+                    <p class="product-category">Men Tennis</p>
+                    <p class="product-colors">4 colours</p>
+                    <p class="product-badge badge-new">New</p>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <img src="https://assets.adidas.com/images/w_766,h_766,f_auto,q_auto,fl_lossy,c_fill,g_auto/5978e42b08b240e1b326e8fc08858db1_9366/club-3str-polo.jpg" alt="Product Image" class="product-image-placeholder">
+                <div class="product-info">
+                    <p class="price">₹ 1 699.50</p>
+                    <p class="original-price">₹ 2 999.00 <span class="discount">Original price -40%</span></p>
+                    <p class="product-name">Yeezy Clog Adilette 22 Slides</p>
+                    <p class="product-category">Men Sportswear</p>
+                    <p class="product-colors">4 colours</p>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <img src="https://assets.adidas.com/images/w_766,h_766,f_auto,q_auto,fl_lossy,c_fill,g_auto/eedca44e14e049818cb2d38840d4dad7_9366/tiro-25-essentials-training-pants.jpg" alt="Product Image" class="product-image-placeholder">
+                <div class="product-info">
+                    <p class="price">₹ 3 199.50</p>
+                    <p class="original-price">₹ 4 999.00 <span class="discount">Original price -40%</span></p>
+                    <p class="product-name">Adicolor Classics 3-Stripes Pants</p>
+                    <p class="product-category">Women originals</p>
+                    <p class="product-colors">2 colours</p>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <img src="https://assets.adidas.com/images/w_766,h_766,f_auto,q_auto,fl_lossy,c_fill,g_auto/3cc1965fae2844b7bb037a70f2c8375f_9366/grand-court-alpha-00s-shoes.jpg" alt="Product Image" class="product-image-placeholder">
+                <div class="product-info">
+                    <p class="price">₹ 3 199.50</p>
+                    <p class="original-price">₹ 4 999.00 <span class="discount">Original price -40%</span></p>
+                    <p class="product-name">Man.Utd x Red 24/25 shoes</p>
+                    <p class="product-category">Men Sportswear</p>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <img src="https://assets.adidas.com/images/w_766,h_766,f_auto,q_auto,fl_lossy,c_fill,g_auto/8877597dbccf4db09ec3577eefc61a14_9366/ultradream-dna-shoes.jpg" alt="Product Image" class="product-image-placeholder">
+                <div class="product-info">
+                    <p class="price">₹ 3 199.50</p>
+                    <p class="original-price">₹ 4 999.00 <span class="discount">Original price -40%</span></p>
+                    <p class="product-name">Essentials French Terry Tapered Cuff shoes</p>
+                    <p class="product-category">Men Sportswear</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="pagination">
+            <span class="page-info">Page: 1 of 82</span>
+            <button class="next-button">NEXT</button>
+        </div>
+
+        <section class="categories-section">
+            <h2>OUR CLOTHING AND SHOE CATEGORIES</h2>
+            <div class="categories-section-grid">
+                <ul>
+                    <li><a href="#">Men's Shoes</a></li>
+                    <li><a href="#">Women's Shoes</a></li>
+                    <li><a href="#">Kids' Shoes</a></li>
+                    <li><a href="#">Running Shoes</a></li>
+                </ul>
+                <ul>
+                    <li><a href="#">Football Shoes</a></li>
+                    <li><a href="#">Cricket Shoes</a></li>
+                    <li><a href="#">Gym & Training Shoes</a></li>
+                    <li><a href="#">Sportswear Shoes</a></li>
+                </ul>
+                <ul>
+                    <li><a href="#">Originals Shoes</a></li>
+                    <li><a href="#">Men's Sneakers</a></li>
+                    <li><a href="#">Women's Sneakers</a></li>
+                    <li><a href="#">Men's Running Shoes</a></li>
+                </ul>
+                <ul>
+                    <li><a href="#">Women's Running Shoes</a></li>
+                    <li><a href="#">Men's Football Shoes</a></li>
+                    <li><a href="#">Men's Original Shoes</a></li>
+                    <li><a href="#">Men's Samba Shoes</a></li>
+                </ul>
+                 <ul>
+                    <li><a href="#">Men's Campus Shoes</a></li>
+                    <li><a href="#">Men's Stan Smith Shoes</a></li>
+                    <li><a href="#">Men's Superstar Shoes</a></li>
+                    <li><a href="#">Men's Spezial Shoes</a></li>
+                </ul>
+                 <ul>
+                    <li><a href="#">Diwali Offer</a></li>
+                    <li><a href="#">Diwali Offer For Men</a></li>
+                    <li><a href="#">Diwali Offer For Women</a></li>
+                    <li><a href="#">Diwali Offer For Kids</a></li>
+                </ul>
+            </div>
+        </section>
+
+    </main>
+
+    <section class="signup-banner">
+        <div class="container">
+            <h2>
+                JOIN ADIDAS AND GET 10% OFF
+            </h2>
+            <a href="#" class="signup-button">
+                <span>SIGN UP FOR FREE</span>
+                <img src="https://api.iconify.design/mdi:arrow-right.svg?color=black" alt="Arrow" width="20" height="20">
+            </a>
+        </div>
+    </section>
+
+    <footer class="main-footer">
+        <div class="container footer-grid">
+            <div class="footer-column">
+                <h3>PRODUCTS</h3>
+                <ul>
+                    <li><a href="#">Footwear</a></li>
+                    <li><a href="#">Clothing</a></li>
+                    <li><a href="#">Accessories</a></li>
+                    <li class="separator"><a href="#">Outlet-Sale</a></li>
+                    <li><a href="#">New Arrivals</a></li>
+                    <li><a href="#">Flat 50% Off!</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>SPORTS</h3>
+                <ul>
+                    <li><a href="#">Cricket</a></li>
+                    <li><a href="#">Running</a></li>
+                    <li><a href="#">Football</a></li>
+                    <li><a href="#">Gym/Training</a></li>
+                    <li><a href="#">Tennis</a></li>
+                    <li><a href="#">Hiking & Outdoor</a></li>
+                    <li><a href="#">Basketball</a></li>
+                    <li><a href="#">Swimming</a></li>
+                    <li><a href="#">Skateboarding</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h3>COLLECTIONS</h3>
+                <ul>
+                    <li><a href="#">Ultraboost</a></li>
+                    <li><a href="#">Superstar</a></li>
+                    <li><a href="#">NMD</a></li>
+                    <li><a href="#">Stan Smith</a></li>
+                    <li><a href="#">Sustainability</a></li>
+                    <li><a href="#">Predator</a></li>
+                    <li><a href="#">Parley</a></li>
+                    <li><a href="#">Adicolor</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>SUPPORT</h3>
+                <ul>
+                    <li><a href="#">Help</a></li>
+                    <li><a href="#">UNiDAYS</a></li>
+                    <li><a href="#">Customer Services</a></li>
+                    <li><a href="#">Returns & Exchanges</a></li>
+                    <li><a href="#">Shipping</a></li>
+                    <li><a href="#">Order Tracker</a></li>
+                    <li><a href="#">Store Finder</a></li>
+                    <li><a href="#">adiClub</a></li>
+                    <li><a href="#">adiClub Terms and conditions</a></li>
+                    <li><a href="#">Sitemap</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h3>COMPANY INFO</h3>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">adidas stories</a></li>
+                    <li><a href="#">adidas Apps</a></li>
+                    <li><a href="#">Entity Details</a></li>
+                    <li><a href="#">Press</a></li>
+                    <li><a href="#">Careers</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column footer-follow-us">
+                <h3>FOLLOW US</h3>
+                <a href="#">
+                    <img src="https://api.iconify.design/mdi:instagram.svg?color=white" alt="Instagram" width="24" height="24">
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <footer class="sub-footer">
+        <div class="container">
+            <ul>
+                <li><a href="#">Cookie Settings</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Terms and Conditions</a></li>
+                <li><a href="#">Cookies</a></li>
+            </ul>
+            <p>&copy; 2024 adidas India Marketing Pvt. Ltd.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
+
